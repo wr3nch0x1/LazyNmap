@@ -22,22 +22,24 @@ LazyNmap [Windows Version] aims to be a Nmap Automate Tasker
 
 #>
 
-[String]$ScanName = Read-Host -Prompt '[+] Welcome Boomer! Please enter the Scan Name (USE UNIQUE NAME OR CRY ALL DAY):'
+$ScanName = Read-Host -Prompt '[+] Welcome Boomer! Please enter the Scan Name (USE UNIQUE NAME OR CRY ALL DAY):'
 
 
 $Nmaparg = Read-Host -Prompt '[+] Now provide your Nmap Arguments (such as: -v -A -T4 192.168.1.1 -oX out.xml):'
 
 
-[String]$timing = Read-Host -Prompt '[+] Last Promise, Enter your Timing (Format: 2/13/2020 4:06:00 PM ):'
+$timing = Read-Host -Prompt '[+] Enter your Timing (Format: 2/13/2020 4:06:00 PM ):'
 
 Write-Host '[!] Using Defult Nmap Installed Location (C:\Program Files (x86)\Nmap\nmap.exe)'
 
 Write-Host '[!] Scheduling Scan for you, MAKE SURE SYSTEM WILL NOT GET SHUTDOWN DURING THE SCHEDULE. BYE'
 
-$arg1 = New-ScheduledTaskAction -Execute 'C:\Program Files (x86)\Nmap\nmap.exe' -Argument $Nmaparg
+$arg1 = New-ScheduledTaskAction -Execute 'C:\Program Files (x86)\Nmap\nmap.exe' -Argument $Nmaparg 
+
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -Priority 0
 
 $arg2 = New-ScheduledTaskTrigger -Once -At $timing
 
 $boomer = whoami
 
-Register-ScheduledTask -TaskName $ScanName -User $boomer -Action $arg1 -Trigger $arg2
+Register-ScheduledTask -TaskName $ScanName -User $boomer -Action $arg1 -Trigger $arg2 -Settings $settings
