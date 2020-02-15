@@ -1,4 +1,4 @@
- LazyNmap [Windows Version] aims to be a Nmap Automate Tasker because Default Nmap does not provide functionality to automate of schedule the scans.
+ LazyNmap [Windows Version] aims to be a Nmap Automate Tasker because Default Nmap does not provide functionality to schedule the scans.
 
  It uses the Windows Task Scheduler and Powershell Functions. Tested in Powershell v5.
 
